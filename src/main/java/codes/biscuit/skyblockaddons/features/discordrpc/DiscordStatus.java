@@ -89,10 +89,11 @@ public enum DiscordStatus implements ButtonSelect.SelectItem {
 
     CUSTOM("discordStatus.titleCustom", "discordStatus.descriptionCustom",
             () -> {
-                SkyblockAddons main = SkyblockAddons.getInstance();
-
-                String text = main.getConfigValues().getCustomStatus(main.getDiscordRPCManager().getCurrentEntry());
-                return text.substring(0, Math.min(text.length(), 100));
+//                SkyblockAddons main = SkyblockAddons.getInstance();
+//
+//                String text = main.getConfigValues().getCustomStatus(main.getDiscordRPCManager().getCurrentEntry());
+//                return text.substring(0, Math.min(text.length(), 100));
+                return "Custom Status";
             }),
 
     AUTO_STATUS("discordStatus.titleAuto", "discordStatus.descriptionAuto", () -> {
@@ -186,10 +187,10 @@ public enum DiscordStatus implements ButtonSelect.SelectItem {
         this.displayMessageSupplier = displayMessageSupplier;
     }
 
-    public String getDisplayString(EnumUtils.DiscordStatusEntry currentEntry) {
-        SkyblockAddons.getInstance().getDiscordRPCManager().setCurrentEntry(currentEntry);
-        return displayMessageSupplier.get();
-    }
+//    public String getDisplayString(EnumUtils.DiscordStatusEntry currentEntry) {
+//        SkyblockAddons.getInstance().getDiscordRPCManager().setCurrentEntry(currentEntry);
+//        return displayMessageSupplier.get();
+//    }
 
     @Override
     public String getName() {

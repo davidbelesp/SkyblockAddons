@@ -24,7 +24,7 @@ public class TabListParser {
 
     private static final SkyblockAddons main = SkyblockAddons.getInstance();
 
-    public static String HYPIXEL_ADVERTISEMENT_CONTAINS = "HYPIXEL.NET";
+    public static String HYPIXEL_ADVERTISEMENT_CONTAINS = "FAKEPIXEL.NET";
 
     private static final Pattern GOD_POTION_PATTERN = Pattern.compile("You have a God Potion active! (?<timer>\\d{0,2}:?\\d{1,2}:\\d{2})");
     private static final Pattern ACTIVE_EFFECTS_PATTERN = Pattern.compile("Active Effects(?:§.)*(?:\\n(?:§.)*§7.+)*");

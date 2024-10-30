@@ -87,10 +87,7 @@ repositories {
         name 'JitPack'
         url 'https://jitpack.io'
     }
-    maven {
-        name 'DevAuth'
-        url 'https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1'
-    }
+    maven { url = "https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1" }
 }
 
 dependencies {
@@ -99,13 +96,7 @@ dependencies {
     forge("net.minecraftforge:forge:${project.forgeVersion}")
     runtimeOnly('me.djtheredstoner:DevAuth-forge-legacy:1.1.0')
 
-    // Discord RPC for Java https://github.com/jagrosh/DiscordIPC
-    bundle('com.github.ILikePlayingGames:DiscordIPC:-SNAPSHOT') {
-        exclude module: 'log4j'
-        because 'Different version conflicts with Minecraft\'s Log4J'
-        exclude module: 'gson'
-        because 'Different version conflicts with Minecraft\'s GSON'
-    }
+
     bundle('com.github.BiscuitDevelopment:HypixelLocalizationLib:7122472085') {
         exclude module: 'gson'
         because 'Different version conflicts with Minecraft\'s GSON'
@@ -172,8 +163,7 @@ shadowJar {
     exclude('module-info.class')
     exclude('META-INF/versions/')
 
-    // Relocate Discord RPC into the main codebase
-    relocate 'com.jagrosh.discordipc', 'shadow.discordipc'
+
 }
 
 test {

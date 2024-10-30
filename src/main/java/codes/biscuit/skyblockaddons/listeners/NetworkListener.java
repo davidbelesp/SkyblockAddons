@@ -34,9 +34,9 @@ public class NetworkListener {
     public void onSkyblockJoined(SkyblockJoinedEvent event) {
         logger.info("Detected joining skyblock!");
         main.getUtils().setOnSkyblock(true);
-        if (main.getConfigValues().isEnabled(Feature.DISCORD_RPC)) {
-            main.getDiscordRPCManager().start();
-        }
+//        if (main.getConfigValues().isEnabled(Feature.DISCORD_RPC)) {
+//            main.getDiscordRPCManager().start();
+//        }
         updateHealth = main.getNewScheduler().scheduleRepeatingTask(new SkyblockRunnable() {
             @Override
             public void run() {
@@ -52,9 +52,9 @@ public class NetworkListener {
         logger.info("Detected leaving skyblock!");
         main.getUtils().setOnSkyblock(false);
         main.getUtils().setProfileName("Unknown");
-        if (main.getDiscordRPCManager().isActive()) {
-            main.getDiscordRPCManager().stop();
-        }
+//        if (main.getDiscordRPCManager().isActive()) {
+//            main.getDiscordRPCManager().stop();
+//        }
         if (updateHealth != null) {
             main.getNewScheduler().cancel(updateHealth);
             updateHealth = null;

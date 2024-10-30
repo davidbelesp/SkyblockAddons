@@ -218,7 +218,7 @@ public class SkyblockAddons {
 
     @Mod.EventHandler
     public void stop(FMLModDisabledEvent e) {
-        discordRPCManager.stop();
+//        discordRPCManager.stop();
     }
 
     public KeyBinding getOpenSettingsKey() {
