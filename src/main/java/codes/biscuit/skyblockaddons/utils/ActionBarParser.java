@@ -4,6 +4,8 @@ import codes.biscuit.skyblockaddons.SkyblockAddons;
 import codes.biscuit.skyblockaddons.core.*;
 import lombok.Getter;
 import lombok.Setter;
+import net.minecraft.client.Minecraft;
+import net.minecraft.util.ChatComponentText;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.Logger;
 
@@ -53,7 +55,7 @@ public class ActionBarParser {
     private static final Pattern COLLECTIONS_CHAT_PATTERN = Pattern.compile("\\+(?<gained>[0-9,.]+) (?<skillName>[A-Za-z]+) (?<progress>\\((((?<current>[0-9.,kM]+)/(?<total>[0-9.,kM]+))|((?<percent>[0-9.,]+)%))\\))");
     private static final Pattern SKILL_GAIN_PATTERN_S = Pattern.compile("\\+(?<gained>[0-9,.]+) (?<skillName>[A-Za-z]+) (?<progress>\\((((?<current>[0-9.,]+)/(?<total>[0-9.,]+))|((?<percent>[0-9.]+)%))\\))");
     private static final Pattern MANA_PATTERN_S = Pattern.compile("(?<num>[0-9,.]+)/(?<den>[0-9,.]+)✎(| Mana| (?<overflow>-?[0-9,.]+)ʬ)");
-    private static final Pattern DEFENSE_PATTERN_S = Pattern.compile("(?<defense>[0-9,.]+)❈ Defense(?<other>( (?<align>\\|\\|\\|))?( {2}(?<tether>T[0-9,.]+!?))?.*)?");
+    private static final Pattern DEFENSE_PATTERN_S = Pattern.compile("(?<defense>[0-9,.]+)❇ Defense(?<other>( (?<align>\\|\\|\\|))?( {2}(?<tether>T[0-9,.]+!?))?.*)?");
     private static final Pattern HEALTH_PATTERN_S =Pattern.compile("(?<health>[0-9,.]+)/(?<maxHealth>[0-9,.]+)❤(?<wand>\\+(?<wandHeal>[0-9,.]+)[▆▅▄▃▂▁])?");
 
 
@@ -176,7 +178,7 @@ public class ActionBarParser {
 
                 // ❤ indicates a health section
                 return parseHealth(section);
-            } else if (section.contains("❈")) {
+            } else if (section.contains("❇")) {
                 // ❈ indicates a defense section
                 return parseDefense(section);
             } else if (section.endsWith("§f❂ True Defense")) {
@@ -191,8 +193,8 @@ public class ActionBarParser {
                 return parseDrill(section, splitStats);
             }
         } catch (ParseException e) {
-            logger.error("The section \"" + section + "\" will be skipped due to an error during number parsing.");
-            logger.error("Failed to parse number at offset " + e.getErrorOffset() + " in string \"" + e.getMessage() + "\".", e);
+            logger.error("The section \"{}\" will be skipped due to an error during number parsing.", section);
+            logger.error("Failed to parse number at offset {} in string \"{}\".", e.getErrorOffset(), e.getMessage(), e);
             return section;
         }
 
@@ -324,7 +326,7 @@ public class ActionBarParser {
         // Tethered T1 (Dungeon Healer)--means tethered to 1 person I think: §a1024§a? Defense§6  T1
         // Tethered T3! (Dungeon Healer)--not sure why exclamation mark: §a1039§a? Defense§a§l  T3!
         // Tethered T3! (Dungeon Healer) + Aligned ||| (Gyrokinetic Wand): §a1039§a? Defense§a |||§a§l  T3!
-        String stripped = TextUtils.stripColor(defenseSection);
+        String stripped = TextUtils.stripMultipleColor(defenseSection);
         Matcher m = DEFENSE_PATTERN_S.matcher(stripped);
         if (m.matches()) {
             float defense = parseFloat(m.group("defense"));

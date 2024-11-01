@@ -22,7 +22,7 @@ public class TextUtils {
      */
     public static final NumberFormat NUMBER_FORMAT = NumberFormat.getInstance(Locale.US);
 
-    private static final Pattern STRIP_COLOR_PATTERN = Pattern.compile("(?i)§[0-9A-FK-ORZ]");
+    private static final Pattern STRIP_COLOR_PATTERN = Pattern.compile("(?i)(§[0-9A-FK-ORZ])+");
     private static final Pattern STRIP_ICONS_PATTERN = Pattern.compile("[♲Ⓑ⚒ቾ]+");
     private static final Pattern STRIP_PREFIX_PATTERN = Pattern.compile("\\[[^\\[\\]]*\\]");
     private static final Pattern REPEATED_COLOR_PATTERN = Pattern.compile("(?i)(§[0-9A-FK-ORZ])+");
@@ -62,6 +62,15 @@ public class TextUtils {
      */
     public static String stripColor(final String input) {
         return STRIP_COLOR_PATTERN.matcher(input).replaceAll("");
+    }
+
+    /**
+     * Computationally efficient way to test if a given string has a rendered length of 0
+     * @param input string to test
+     * @return Text without color codes, if multiple color codes, as §a§a§a, are present
+     */
+    public static String stripMultipleColor(String input) {
+        return REPEATED_COLOR_PATTERN.matcher(input).replaceAll("");
     }
 
     /**
