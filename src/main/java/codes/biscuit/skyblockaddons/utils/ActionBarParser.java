@@ -54,7 +54,7 @@ public class ActionBarParser {
 
     private static final Pattern COLLECTIONS_CHAT_PATTERN = Pattern.compile("\\+(?<gained>[0-9,.]+) (?<skillName>[A-Za-z]+) (?<progress>\\((((?<current>[0-9.,kM]+)/(?<total>[0-9.,kM]+))|((?<percent>[0-9.,]+)%))\\))");
     private static final Pattern SKILL_GAIN_PATTERN_S = Pattern.compile("\\+(?<gained>[0-9,.]+) (?<skillName>[A-Za-z]+) (?<progress>\\((((?<current>[0-9.,]+)/(?<total>[0-9.,]+))|((?<percent>[0-9.]+)%))\\))");
-    private static final Pattern MANA_PATTERN_S = Pattern.compile("(?<num>[0-9,.]+)/(?<den>[0-9,.]+)✎(| Mana| (?<overflow>-?[0-9,.]+)ʬ)");
+    private static final Pattern MANA_PATTERN_S = Pattern.compile("(?<num>[0-9,.]+)/(?<den>[0-9,.]+)✎( Mana (?<overflow>-?[0-9,.]+)ʬ)");
     private static final Pattern DEFENSE_PATTERN_S = Pattern.compile("(?<defense>[0-9,.]+)❇ Defense(?<other>( (?<align>\\|\\|\\|))?( {2}(?<tether>T[0-9,.]+!?))?.*)?");
     private static final Pattern HEALTH_PATTERN_S =Pattern.compile("(?<health>[0-9,.]+)/(?<maxHealth>[0-9,.]+)❤(?<wand>\\+(?<wandHeal>[0-9,.]+)[▆▅▄▃▂▁])?");
 
